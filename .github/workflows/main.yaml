@@ -35,7 +35,7 @@ jobs:
           git checkout -b "$BRANCH_NAME"
           git push -u origin "$BRANCH_NAME"
       - name: Create Pull Request
-        uses: actions/create-pull-request@v2
+        uses: peter-evans/create-pull-request@v7
         with:
           branch: ${{ steps.push-changes.outputs.BRANCH_NAME }}
           title: "[Sync Bot] sync repoqa results"
@@ -69,7 +69,7 @@ jobs:
           git checkout -b "$BRANCH_NAME"
           git push -u origin "$BRANCH_NAME"
       - name: Create Pull Request
-        uses: actions/create-pull-request@v2
+        uses: peter-evans/create-pull-request@v7
         with:
           branch: ${{ steps.push-changes.outputs.BRANCH_NAME }}
           title: "[Sync Bot] sync repoqa results"
