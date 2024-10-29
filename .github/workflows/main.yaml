@@ -29,7 +29,7 @@ jobs:
           branch-name="sync-$(date +'%Y-%m-%d-%H-%M-%S')"
           echo "branch-name=$branch-name" >> $GITHUB_OUTPUT
       - name: Create Pull Request
-        if ${{ steps.changes.outputs.changes }}
+        if: steps.changes.outputs.changes
         uses: peter-evans/create-pull-request@v7
         with:
           branch: ${{ steps.push-changes.outputs.BRANCH_NAME }}
