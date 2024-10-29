@@ -18,10 +18,21 @@ jobs:
       - name: Sync EvalPerf Results
         run: |
           python results/evalperf/stats.py
+      - name: Check Whether Changes Exist
+        id: changes
+        run: |
+          changes=$(git status --porcelain)
+          echo "changes=$changes" >> $GITHUB_OUTPUT
+      - name: Setup Sync Branch
+        id: vars
+        run: |
+          branch-name="sync-$(date +'%Y-%m-%d-%H-%M-%S')"
+          echo "branch-name=$branch-name" >> $GITHUB_OUTPUT
       - name: Create Pull Request
+        if ${{ steps.changes.outputs.changes }}
         uses: peter-evans/create-pull-request@v7
         with:
           branch: ${{ steps.push-changes.outputs.BRANCH_NAME }}
-          title: "[Sync Bot] sync repoqa results"
-          body: "Automatically updated RepoQA results"
+          title: "[Sync Bot] sync evalperf results"
+          body: "Automatically sync EvaPerf results"
           base: main
