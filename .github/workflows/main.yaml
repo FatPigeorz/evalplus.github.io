@@ -23,16 +23,16 @@ jobs:
         run: |
           changes=$(git status --porcelain)
           echo "changes=$changes" >> $GITHUB_OUTPUT
-      - name: Setup Sync Branch
+      - name: Setup sync branch name
         id: vars
         run: |
-          branch-name="sync-$(date +'%Y-%m-%d-%H-%M-%S')"
-          echo "branch-name=$branch-name" >> $GITHUB_OUTPUT
+          branch_name="sync-$(date +'%Y-%m-%d-%H-%M-%S')"
+          echo "branch_name=$branch_name" >> $GITHUB_ENV 
       - name: Create Pull Request
         if: steps.changes.outputs.changes
         uses: peter-evans/create-pull-request@v7
         with:
-          branch: ${{ steps.push-changes.outputs.BRANCH_NAME }}
+          branch: ${{ env.branch_name }}
           title: "[Sync Bot] sync evalperf results"
           body: "Automatically sync EvaPerf results"
           base: main
