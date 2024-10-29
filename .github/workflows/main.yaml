@@ -22,6 +22,7 @@ jobs:
         run: |
           python results/repoqa/fetch_results.py
       - name: Commit changes
+        run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add results/repoqa/COMBINED-RESULTS.json
@@ -55,6 +56,7 @@ jobs:
         run: |
           python results/evalperf/stats.py
       - name: Commit changes
+        run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add results/evalperf/COMBINED-RESULTS.json
