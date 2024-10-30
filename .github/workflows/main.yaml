@@ -2,7 +2,7 @@ name: Sync Results
 on:
   push:
     branches:
-      - main
+      - '*'
 
 jobs:
   evalperf-sync:
@@ -35,7 +35,7 @@ jobs:
           branch: ${{ env.branch_name }}
           title: "[Sync Bot] sync evalperf results"
           body: "Automatically sync EvaPerf results"
-          base: main
+          base: "${{ github.ref_name }}"
 
   repoqa-sync:
     runs-on: ubuntu-latest
@@ -68,4 +68,4 @@ jobs:
           branch: ${{ env.branch_name }}
           title: "[Sync Bot] sync repoqa results"
           body: "Automatically sync repoqa results"
-          base: main
+          base: "${{ github.ref_name }}"
